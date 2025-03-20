@@ -1,4 +1,4 @@
-package com.vw.preferences.infrastructure.rest;
+package com.vw.preferences.infrastructure.rest.preferences;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

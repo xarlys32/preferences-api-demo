@@ -6,6 +6,6 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class Consent {
-    private String id;
+    private String consentId;
     private boolean enabled;
 }

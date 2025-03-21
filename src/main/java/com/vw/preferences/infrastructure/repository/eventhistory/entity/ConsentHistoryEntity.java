@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Data
 public class ConsentHistoryEntity {
-    private String id;
+    private String consentId;
     private boolean enabled;
     private LocalDateTime updateTimestamp;
 }

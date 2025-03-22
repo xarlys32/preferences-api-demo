@@ -12,6 +12,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
 import uk.co.jemos.podam.api.PodamFactory;
 import uk.co.jemos.podam.api.PodamFactoryImpl;
+import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -59,13 +60,15 @@ public class EventHistoryUseCasesTest {
 
     @Test
     public void saveEventHistoryReturnsDataAndNewUserWhenInsert() {
-        UserEventHistory newUser = userEventMock;
-        newUser.setUserId(user);
+        UserEventHistory newUser = new UserEventHistory(user, new ArrayList<>());
         when(userEventHistoryRepository.getHistoryByUser(user)).thenReturn(null);
-        when(userEventHistoryRepository.save(newUser)).thenReturn(newUser);
+        when(userEventHistoryRepository.save(any(UserEventHistory.class))).thenReturn(newUser);
 
-        UserEventHistory userEvent =  eventHistoryUseCases.saveEventHistory(event);
+        UserEventHistory userEvent = eventHistoryUseCases.saveEventHistory(event);
 
         assertNotNull(userEvent);
+        assertEquals(newUser.getUserId(), userEvent.getUserId());
+        verify(userEventHistoryRepository).getHistoryByUser(user);
+
     }
 }

@@ -8,6 +8,7 @@ import com.vw.preferences.domain.usecase.user.PostConsentUpdate;
 import com.vw.preferences.infrastructure.rest.common.ErrorDTO;
 import com.vw.preferences.infrastructure.rest.user.adapter.UserDTOMapper;
 import com.vw.preferences.infrastructure.rest.user.dtos.UserResponseDTO;
+import io.swagger.v3.oas.annotations.Operation;
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.axonframework.queryhandling.QueryGateway;
 import org.springframework.http.ResponseEntity;
@@ -31,15 +32,16 @@ public class PreferencesController {
     }
 
     @GetMapping()
-    public ResponseEntity<UserResponseDTO> getPreferencesByUserId(@RequestParam String userId) throws ExecutionException, InterruptedException {
-        //Mail
-        var futurePreferences = queryGateway.query(new GetPreferences(userId), User.class);
+    @Operation(summary = "Get event preferences by email")
+    public ResponseEntity<UserResponseDTO> getPreferencesByUserId(@RequestParam String email) throws ExecutionException, InterruptedException {
+        var futurePreferences = queryGateway.query(new GetPreferences(email), User.class);
         User preference = futurePreferences.get();
 
         return ResponseEntity.ok(preferencesDTOMapper.toResponseDTO(preference));
     }
 
-    @PostMapping()
+    @PostMapping("/register")
+    @Operation(summary = "Get event from a range of dates with format yyyy-MM-dd")
     public ResponseEntity<UserResponseDTO> registerMail(@RequestParam String email) throws ExecutionException, InterruptedException {
         var newUserPreferences = commandGateway.sendAndWait(new PostAccountCreate(email));
         UserResponseDTO responseDTO = preferencesDTOMapper.toResponseDTO((User) newUserPreferences);
@@ -47,10 +49,11 @@ public class PreferencesController {
         return ResponseEntity.ok(responseDTO);
     }
 
-    @PostMapping()
+    @PostMapping("/update")
+    @Operation(summary = "Get event from a range of dates with format yyyy-MM-dd")
     public ResponseEntity<UserResponseDTO> updatePreferences(@RequestParam String email, @RequestParam String consent,
                                                              @RequestParam String enabled) throws ExecutionException, InterruptedException {
-        var newUserPreferences = commandGateway.sendAndWait(new PostConsentUpdate(email, new Consent(consent, true)));
+        var newUserPreferences = commandGateway.sendAndWait(new PostConsentUpdate(email, new Consent(consent, Boolean.parseBoolean(enabled))));
         UserResponseDTO responseDTO = preferencesDTOMapper.toResponseDTO((User) newUserPreferences);
 
         return ResponseEntity.ok(responseDTO);

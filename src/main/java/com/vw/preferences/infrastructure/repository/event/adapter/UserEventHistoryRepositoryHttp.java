@@ -24,14 +24,6 @@ public class UserEventHistoryRepositoryHttp implements UserEventHistoryRepositor
         return userEventHistoryEntityMapper.toDom(userEventHistoryMongoRepository.save(userEventHistoryEntity));
     }
 
-    @Override
-    public UserEventHistory createHistory(String mail) {
-        // Deberia recibir el User de dominio recien creado
-        UserEventHistoryEntity newUserPreferenceEntity = new UserEventHistoryEntity();
-        newUserPreferenceEntity.setConsents(createConsentForNewUser());
-
-        return userEventHistoryEntityMapper.toDom(userEventHistoryMongoRepository.save(newUserPreferenceEntity));
-    }
 
     @Override
     public UserEventHistory getHistoryByUser(String userId) {

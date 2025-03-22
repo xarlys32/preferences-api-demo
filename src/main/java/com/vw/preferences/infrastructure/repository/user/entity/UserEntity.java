@@ -12,7 +12,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Document
+@Document(collection = "userPreferences")
 public class UserEntity {
     @Id
     private  String userId;

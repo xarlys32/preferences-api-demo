@@ -8,7 +8,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 public class UserResponseDTO {
-    private String id;
+    private String userId;
     private String email;
     private List<ConsentDTO> consents;
 }

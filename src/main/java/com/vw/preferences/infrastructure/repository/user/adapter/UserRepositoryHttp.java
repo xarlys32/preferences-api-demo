@@ -35,8 +35,8 @@ public class UserRepositoryHttp implements UserRepository {
         return userEntityMapper.toDom(userMongoRepository.save(newUserPreferenceEntity));
     }
 
-    public User getPreferencesByUser(String userId) {
-        return null;
+    public User getPreferencesByUser(String email) {
+        return userEntityMapper.toDom(userMongoRepository.findByEmail(email));
     }
 
     private UserEntity createUserByEmail(String email) {

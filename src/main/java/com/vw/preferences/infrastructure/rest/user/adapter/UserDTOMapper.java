@@ -15,6 +15,6 @@ public class UserDTOMapper {
     }
 
     private static ConsentDTO toConsentDTO(Consent consent) {
-        return new ConsentDTO(consent.getId(), consent.isEnabled());
+        return new ConsentDTO(consent.getConsentId(), consent.getEnabled());
     }
 }

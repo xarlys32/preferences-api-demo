@@ -30,20 +30,20 @@ public class UserEventHistoryEntityMapper {
     }
 
     public ConsentHistory fromPostEventToDom(Consent consent) {
-        return new ConsentHistory(consent.getConsentId(), consent.isEnabled(), LocalDate.now().atStartOfDay());
+        return new ConsentHistory(consent.getConsentId(), consent.getEnabled(), LocalDate.now().atStartOfDay());
     }
 
     private static ConsentHistoryEntity consentToDocument(ConsentHistory consentHistory) {
-        return new ConsentHistoryEntity(consentHistory.getId(), consentHistory.isEnabled(),
+        return new ConsentHistoryEntity(consentHistory.getConsentId(), consentHistory.isEnabled(),
                 consentHistory.getUpdateTimestamp());
     }
 
     private static ConsentHistory consentToDom(ConsentHistoryEntity consentHistoryEntity) {
-        return new ConsentHistory(consentHistoryEntity.getId(), consentHistoryEntity.isEnabled(),
+        return new ConsentHistory(consentHistoryEntity.getConsentId(), consentHistoryEntity.isEnabled(),
                 consentHistoryEntity.getUpdateTimestamp());
     }
 
     private static ConsentHistory fromConsentToDom(Consent consent) {
-        return new ConsentHistory(consent.getConsentId(), consent.isEnabled(), LocalDate.now().atStartOfDay());
+        return new ConsentHistory(consent.getConsentId(), consent.getEnabled(), LocalDate.now().atStartOfDay());
     }
 }

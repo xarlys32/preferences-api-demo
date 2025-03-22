@@ -1,7 +1,7 @@
 package com.vw.preferences.infrastructure.rest.event;
 
 import com.vw.preferences.domain.usecase.user.GetPreferences;
-import com.vw.preferences.domain.usecase.user.PostMailPreferences;
+import com.vw.preferences.domain.usecase.user.PostAccountCreate;
 import com.vw.preferences.infrastructure.rest.event.adapter.UseEventHistoryDTOMapper;
 import com.vw.preferences.infrastructure.rest.event.dtos.UserEventHistoryResponseDTO;
 import org.axonframework.commandhandling.gateway.CommandGateway;
@@ -37,7 +37,7 @@ public class EventHistoryController {
     @PostMapping()
     public ResponseEntity<UserEventHistoryResponseDTO> registerMail(@RequestParam String mail) throws ExecutionException, InterruptedException {
         // validar mail
-        var newUserPreferences = commandGateway.sendAndWait(new PostMailPreferences(mail));
+        var newUserPreferences = commandGateway.sendAndWait(new PostAccountCreate(mail));
         UserEventHistoryResponseDTO responseDTO = preferencesDTOMapper.toResponseDTO((Event) newUserPreferences);
 
         return ResponseEntity.ok(responseDTO);

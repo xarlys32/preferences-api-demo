@@ -7,5 +7,5 @@ import lombok.Data;
 @AllArgsConstructor
 public class Consent {
     private String consentId;
-    private boolean enabled;
+    private Boolean enabled;
 }

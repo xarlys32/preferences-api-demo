@@ -10,6 +10,6 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @NoArgsConstructor
 @Document
 public class ConsentEntity {
-    private String id;
+    private String consentId;
     private boolean enabled;
 }

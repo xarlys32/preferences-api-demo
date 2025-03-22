@@ -16,18 +16,18 @@ public class UserEntityMapper {
             List<Consent> consentList = userEntity.getConsents().stream()
                     .map(UserEntityMapper::consentToDom)
                     .toList();
-            return new User(userEntity.getId(), userEntity.getEmail(), consentList);
+            return new User(userEntity.getUserId(), userEntity.getEmail(), consentList);
         }
 
         public UserEntity toDocument(User user) {
             List<ConsentEntity> consentEntities = user.getConsents().stream()
                     .map(UserEntityMapper::consentToDocument)
                     .toList();
-            return new UserEntity(user.getId(), user.getEmail(), consentEntities);
+            return new UserEntity(user.getUserId(), user.getEmail(), consentEntities);
         }
 
         private static Consent consentToDom(ConsentEntity consentEntity) {
-            return new Consent(consentEntity.getId(), consentEntity.isEnabled());
+            return new Consent(consentEntity.getConsentId(), consentEntity.isEnabled());
         }
 
         private static ConsentEntity consentToDocument(Consent consent) {

@@ -29,6 +29,7 @@ public class PreferencesController {
 
     @GetMapping()
     public ResponseEntity<UserResponseDTO> getPreferencesByUserId(@RequestParam String userId) throws ExecutionException, InterruptedException {
+        //Mail
         var futurePreferences = queryGateway.query(new GetPreferences(userId), User.class);
         User preference = futurePreferences.get();
 

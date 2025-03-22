@@ -1,6 +1,6 @@
-package com.vw.preferences.domain.port.eventshistory;
+package com.vw.preferences.domain.port.event;
 
-import com.vw.preferences.domain.model.eventhistory.UserEventHistory;
+import com.vw.preferences.domain.model.event.UserEventHistory;
 
 public interface UserEventHistoryRepository {
     UserEventHistory save(UserEventHistory userEventHistory);

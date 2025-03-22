@@ -1,4 +1,4 @@
-package com.vw.preferences.domain.model.eventhistory;
+package com.vw.preferences.domain.model.event;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

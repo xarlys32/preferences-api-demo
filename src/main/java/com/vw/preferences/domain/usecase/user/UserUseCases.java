@@ -2,7 +2,7 @@ package com.vw.preferences.domain.usecase.user;
 
 import com.vw.preferences.domain.model.user.User;
 import com.vw.preferences.domain.port.user.UserRepository;
-import com.vw.preferences.domain.usecase.eventhistory.PostEventHistory;
+import com.vw.preferences.domain.usecase.event.PostConsentEvent;
 import org.axonframework.commandhandling.CommandHandler;
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.axonframework.queryhandling.QueryHandler;
@@ -28,7 +28,7 @@ public class UserUseCases {
     @CommandHandler
     public User savePreferences(PostMailPreferences command) {
         User userStored = userRepository.createAccount(command.mail());
-        commandGateway.send(new PostEventHistory(userStored));
+        commandGateway.send(new PostConsentEvent(userStored));
 
         return userRepository.createAccount(command.mail());
     }

@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 public class UserDTOMapper {
     public UserResponseDTO toResponseDTO(User user) {
 
-        return new UserResponseDTO(user.getId(), user.getEmail(),
+        return new UserResponseDTO(user.getUserId(), user.getEmail(),
                 user.getConsents().stream().map(UserDTOMapper::toConsentDTO).toList());
     }
 

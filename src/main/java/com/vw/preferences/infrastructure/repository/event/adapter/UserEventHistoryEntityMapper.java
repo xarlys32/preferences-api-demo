@@ -1,17 +1,13 @@
-package com.vw.preferences.infrastructure.repository.eventhistory.adapter;
+package com.vw.preferences.infrastructure.repository.event.adapter;
 
-import com.vw.preferences.domain.model.eventhistory.ConsentHistory;
-import com.vw.preferences.domain.model.eventhistory.UserEventHistory;
+import com.vw.preferences.domain.model.event.ConsentHistory;
+import com.vw.preferences.domain.model.event.UserEventHistory;
 import com.vw.preferences.domain.model.user.Consent;
-import com.vw.preferences.domain.model.user.User;
-import com.vw.preferences.infrastructure.repository.eventhistory.entity.ConsentHistoryEntity;
-import com.vw.preferences.infrastructure.repository.eventhistory.entity.UserEventHistoryEntity;
-import com.vw.preferences.infrastructure.repository.user.entity.ConsentEntity;
-import com.vw.preferences.infrastructure.repository.user.entity.UserEntity;
+import com.vw.preferences.infrastructure.repository.event.entity.ConsentHistoryEntity;
+import com.vw.preferences.infrastructure.repository.event.entity.UserEventHistoryEntity;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Component
@@ -33,8 +29,8 @@ public class UserEventHistoryEntityMapper {
         return new UserEventHistoryEntity(userEvent.getUserId(), consentEntities);
     }
 
-    public UserEventHistory fromUserToDom(User user) {
-        return new UserEventHistory(user.getId(), user.getConsents().stream().map(consent -> fromConsentToDom(consent)).toList());
+    public ConsentHistory fromPostEventToDom(Consent consent) {
+        return new ConsentHistory(consent.getConsentId(), consent.isEnabled(), LocalDate.now().atStartOfDay());
     }
 
     private static ConsentHistoryEntity consentToDocument(ConsentHistory consentHistory) {
@@ -48,6 +44,6 @@ public class UserEventHistoryEntityMapper {
     }
 
     private static ConsentHistory fromConsentToDom(Consent consent) {
-        return new ConsentHistory(consent.getConsentId(), consent.isEnabled(), LocalDate.now());
+        return new ConsentHistory(consent.getConsentId(), consent.isEnabled(), LocalDate.now().atStartOfDay());
     }
 }

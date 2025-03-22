@@ -1,4 +1,4 @@
-package com.vw.preferences.infrastructure.repository.eventhistory.entity;
+package com.vw.preferences.infrastructure.repository.event.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

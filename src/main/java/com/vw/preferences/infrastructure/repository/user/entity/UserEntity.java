@@ -12,7 +12,7 @@ import java.util.List;
 @NoArgsConstructor
 @Document
 public class UserEntity {
-    private  String id;
+    private  String userId;
     private  String email;
 
     private List<ConsentEntity> Consents;

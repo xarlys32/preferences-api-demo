@@ -1,5 +1,6 @@
 package com.vw.preferences.domain.usecase.user;
 
+import com.vw.preferences.domain.model.user.Consent;
 import com.vw.preferences.domain.model.user.User;
 import com.vw.preferences.domain.port.user.UserRepository;
 import com.vw.preferences.domain.usecase.event.PostConsentEvent;
@@ -28,7 +29,8 @@ public class UserUseCases {
     @CommandHandler
     public User savePreferences(PostMailPreferences command) {
         User userStored = userRepository.createAccount(command.mail());
-        commandGateway.send(new PostConsentEvent(userStored));
+        Consent lastConsent = userStored.getConsents().get(userStored.getConsents().size() -1 );
+        commandGateway.send(new PostConsentEvent(userStored.getUserId(), lastConsent));
 
         return userRepository.createAccount(command.mail());
     }

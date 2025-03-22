@@ -51,4 +51,10 @@ public class PreferencesController {
 
         return ResponseEntity.ok(responseDTO);
     }
+
+    @ExceptionHandler({IllegalArgumentException.class})
+    public ResponseEntity<String> handleIllegalArgumentExceptions() {
+        return ResponseEntity.badRequest().build();
+    }
+
 }

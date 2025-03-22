@@ -77,7 +77,18 @@ public class UserUseCases {
     }
 
     private void updateConsent(List<Consent> consentList, Consent consentForSave) {
-       // consentList.stream().findFirst(consent -> consent.getConsentId() == consentForSave.getConsentId())
+        boolean updated = consentList.stream()
+                .filter(consent -> consent.getConsentId().equals(consentForSave.getConsentId()))
+                .findFirst()
+                .map(consent -> {
+                    consent.setEnabled(consentForSave.getEnabled());
+                    return true; // Indicate that the consent was found and updated
+                })
+                .orElse(false);
+
+        if (!updated) {
+            consentList.add(consentForSave); // Add the new consent if it was not found
+        }
     }
 
     private User getUserForUpdate(String mail) {

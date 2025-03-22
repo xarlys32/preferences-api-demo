@@ -5,6 +5,7 @@ import com.vw.preferences.domain.model.user.User;
 import com.vw.preferences.domain.usecase.user.GetPreferences;
 import com.vw.preferences.domain.usecase.user.PostAccountCreate;
 import com.vw.preferences.domain.usecase.user.PostConsentUpdate;
+import com.vw.preferences.infrastructure.rest.common.ErrorDTO;
 import com.vw.preferences.infrastructure.rest.user.adapter.UserDTOMapper;
 import com.vw.preferences.infrastructure.rest.user.dtos.UserResponseDTO;
 import org.axonframework.commandhandling.gateway.CommandGateway;
@@ -56,7 +57,7 @@ public class PreferencesController {
     }
 
     @ExceptionHandler({IllegalArgumentException.class})
-    public ResponseEntity<String> handleIllegalArgumentExceptions() {
+    public ResponseEntity<ErrorDTO> handleIllegalArgumentExceptions() {
         return ResponseEntity.badRequest().build();
     }
 

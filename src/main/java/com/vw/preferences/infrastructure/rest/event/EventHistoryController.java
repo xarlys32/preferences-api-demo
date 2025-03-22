@@ -27,7 +27,8 @@ public class EventHistoryController {
     }
 
     @GetMapping()
-    public ResponseEntity<UserEventHistoryResponseDTO> getPreferencesByUserId(@RequestParam String userId) throws ExecutionException, InterruptedException {
+    public ResponseEntity<UserEventHistoryResponseDTO> getPreferencesByUserId(@RequestParam String userId)
+            throws ExecutionException, InterruptedException {
         var futureResponse = queryGateway.query(new GetUserHistory(userId), UserEventHistory.class);
         UserEventHistory history = futureResponse.get();
 

@@ -8,6 +8,7 @@ import com.vw.preferences.infrastructure.repository.user.entity.ConsentEntity;
 import com.vw.preferences.infrastructure.repository.user.entity.UserEntity;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -53,6 +54,6 @@ public class UserRepositoryHttp implements UserRepository {
     }
 
     private List<ConsentEntity> createConsentForNewUser() {
-        return List.of();
+        return new ArrayList<>();
     }
 }

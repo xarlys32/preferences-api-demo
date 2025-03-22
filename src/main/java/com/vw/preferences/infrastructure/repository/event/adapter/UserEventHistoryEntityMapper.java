@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 public class UserEventHistoryEntityMapper {
@@ -16,7 +17,7 @@ public class UserEventHistoryEntityMapper {
     public UserEventHistory toDom(UserEventHistoryEntity userEventEntity) {
         List<ConsentHistory> consentList = userEventEntity.getConsentHistoryList().stream()
                 .map(UserEventHistoryEntityMapper::consentToDom)
-                .toList();
+                .collect(Collectors.toList());
 
         return new UserEventHistory(userEventEntity.getUserId(), consentList);
     }
@@ -24,7 +25,7 @@ public class UserEventHistoryEntityMapper {
     public UserEventHistoryEntity toDocument(UserEventHistory userEvent) {
         List<ConsentHistoryEntity> consentEntities = userEvent.getConsentHistoryList().stream()
                 .map(UserEventHistoryEntityMapper::consentToDocument)
-                .toList();
+                .collect(Collectors.toList());
 
         return new UserEventHistoryEntity(userEvent.getUserId(), consentEntities);
     }

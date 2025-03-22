@@ -4,9 +4,11 @@ import com.vw.preferences.domain.model.event.ConsentHistory;
 import com.vw.preferences.domain.model.event.UserEventHistory;
 import com.vw.preferences.domain.port.event.UserEventHistoryRepository;
 import com.vw.preferences.infrastructure.repository.event.adapter.UserEventHistoryEntityMapper;
+import org.axonframework.commandhandling.CommandHandler;
 import org.axonframework.queryhandling.QueryHandler;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -27,7 +29,7 @@ public class EventHistoryUseCases {
        return  eventHistoryRepository.getHistoryByUser(command.userId());
     }
 
-    @QueryHandler
+    @CommandHandler
     public UserEventHistory saveEventHistory(PostConsentEvent event) {
         UserEventHistory userEvent = getUserFromRepo(event.userId());
         ConsentHistory consentFromEvent = userEventHistoryEntityMapper.fromPostEventToDom(event.consent());
@@ -38,7 +40,7 @@ public class EventHistoryUseCases {
     private UserEventHistory getUserFromRepo(String userId) {
         UserEventHistory userEventHistoryFromRepo = eventHistoryRepository.getHistoryByUser(userId);
         if (userEventHistoryFromRepo == null) {
-            return new UserEventHistory(userId, List.of());
+            return new UserEventHistory(userId, new ArrayList<>());
         }
         return userEventHistoryFromRepo;
     }

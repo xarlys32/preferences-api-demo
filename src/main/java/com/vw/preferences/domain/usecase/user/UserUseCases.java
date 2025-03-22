@@ -39,9 +39,8 @@ public class UserUseCases {
         validateEmail(command.email());
         validateConsent(command.consent());
         User userStored = getUserForUpdate(command.email());
-        getLastConsent(userStored.getConsents());
+        updateConsent(userStored.getConsents(), command.consent());
         commandGateway.send(new PostConsentEvent(userStored.getUserId(), command.consent()));
-
 
         return userRepository.save(userStored);
     }
@@ -77,17 +76,17 @@ public class UserUseCases {
     }
 
     private void updateConsent(List<Consent> consentList, Consent consentForSave) {
-        boolean updated = consentList.stream()
+        boolean consentFoundAndUpdated = consentList.stream()
                 .filter(consent -> consent.getConsentId().equals(consentForSave.getConsentId()))
                 .findFirst()
                 .map(consent -> {
                     consent.setEnabled(consentForSave.getEnabled());
-                    return true; // Indicate that the consent was found and updated
+                    return true;
                 })
                 .orElse(false);
 
-        if (!updated) {
-            consentList.add(consentForSave); // Add the new consent if it was not found
+        if (!consentFoundAndUpdated) {
+            consentList.add(consentForSave);
         }
     }
 

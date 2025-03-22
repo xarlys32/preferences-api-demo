@@ -13,4 +13,5 @@ public class ConsentHistory {
     private String consentId;
     private boolean enabled;
     private LocalDateTime updateTimestamp;
+
 }

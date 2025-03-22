@@ -21,3 +21,4 @@ public class UserEntity {
     @Field(name = "consents")
     private List<ConsentEntity> Consents;
 }
+

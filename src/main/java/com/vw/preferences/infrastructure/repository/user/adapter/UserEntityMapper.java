@@ -12,7 +12,6 @@ import java.util.List;
 public class UserEntityMapper {
 
         public User toDom(UserEntity userEntity) {
-
             List<Consent> consentList = userEntity.getConsents().stream()
                     .map(UserEntityMapper::consentToDom)
                     .toList();

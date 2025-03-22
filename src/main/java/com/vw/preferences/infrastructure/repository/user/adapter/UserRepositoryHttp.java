@@ -1,5 +1,7 @@
 package com.vw.preferences.infrastructure.repository.user.adapter;
 
+import com.mongodb.MongoInterruptedException;
+import com.vw.preferences.domain.exception.PreferencesNotFoundException;
 import com.vw.preferences.domain.model.user.User;
 import com.vw.preferences.domain.port.user.UserRepository;
 import com.vw.preferences.infrastructure.repository.user.entity.ConsentEntity;
@@ -21,14 +23,14 @@ public class UserRepositoryHttp implements UserRepository {
     }
 
     @Override
-    public User save(User preferences) {
+    public User save(User preferences) throws MongoInterruptedException {
         UserEntity preferencesEntity = userEntityMapper.toDocument(preferences);
 
         return userEntityMapper.toDom(userMongoRepository.save(preferencesEntity));
     }
 
     @Override
-    public User createAccount(String mail) {
+    public User createAccount(String mail) throws MongoInterruptedException {
         UserEntity newUserPreferenceEntity = createUserByEmail(mail);
         newUserPreferenceEntity.setConsents(createConsentForNewUser());
 
@@ -36,6 +38,10 @@ public class UserRepositoryHttp implements UserRepository {
     }
 
     public User getPreferencesByUser(String email) {
+        UserEntity userEntity = userMongoRepository.findByEmail(email);
+        if (userEntity == null) {
+            return null;
+        }
         return userEntityMapper.toDom(userMongoRepository.findByEmail(email));
     }
 

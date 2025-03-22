@@ -1,5 +1,7 @@
 package com.vw.preferences.domain.usecase.user;
 
+import com.vw.preferences.domain.exception.DuplicateMailException;
+import com.vw.preferences.domain.exception.PreferencesNotFoundException;
 import com.vw.preferences.domain.model.Constants;
 import com.vw.preferences.domain.model.user.Consent;
 import com.vw.preferences.domain.model.user.User;
@@ -27,27 +29,30 @@ public class UserUseCases {
     @QueryHandler
     public User getPreferences(GetPreferences query) {
         validateEmail(query.email());
+        User user = getUserForUpdate(query.email());
 
         return userRepository.getPreferencesByUser(query.email());
     }
 
     @CommandHandler
     public User savePreferences(PostConsentUpdate command) {
-        validateEmail(command.mail());
+        validateEmail(command.email());
         validateConsent(command.consent());
-        User userStored = userRepository.createAccount(command.mail());
-        Consent lastConsent = getLastConsent(userStored.getConsents());
-        if (lastConsent != null) {
-            commandGateway.send(new PostConsentEvent(userStored.getUserId(), lastConsent));
-        }
+        User userStored = getUserForUpdate(command.email());
+        getLastConsent(userStored.getConsents());
+        commandGateway.send(new PostConsentEvent(userStored.getUserId(), command.consent()));
 
-        return userRepository.createAccount(command.mail());
+
+        return userRepository.save(userStored);
     }
 
     @CommandHandler
-    public User createAccount(PostAccountCreate command) {
+    public User createAccount(PostAccountCreate command) throws IllegalArgumentException {
         validateEmail(command.mail());
-
+        User userStored = userRepository.getPreferencesByUser(command.mail());
+        if(userStored != null) {
+            throw new DuplicateMailException("Email already registered");
+        }
         return userRepository.createAccount(command.mail());
     }
 
@@ -71,11 +76,16 @@ public class UserUseCases {
         }
     }
 
-    private Consent getLastConsent(List<Consent> consentList) {
-        if (consentList.isEmpty()) {
-            return null;
+    private void updateConsent(List<Consent> consentList, Consent consentForSave) {
+       // consentList.stream().findFirst(consent -> consent.getConsentId() == consentForSave.getConsentId())
+    }
+
+    private User getUserForUpdate(String mail) {
+        User userStored = userRepository.getPreferencesByUser(mail);
+        if (userStored == null) {
+            throw new PreferencesNotFoundException("Email not found");
         }
 
-        return consentList.get(consentList.size() - 1);
+        return userStored;
     }
 }

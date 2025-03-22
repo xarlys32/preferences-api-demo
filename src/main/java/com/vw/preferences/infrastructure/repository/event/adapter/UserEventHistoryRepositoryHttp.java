@@ -1,5 +1,6 @@
 package com.vw.preferences.infrastructure.repository.event.adapter;
 
+import com.mongodb.MongoInterruptedException;
 import com.vw.preferences.domain.model.event.UserEventHistory;
 import com.vw.preferences.domain.port.event.UserEventHistoryRepository;
 import com.vw.preferences.infrastructure.repository.event.entity.UserEventHistoryEntity;
@@ -18,7 +19,7 @@ public class UserEventHistoryRepositoryHttp implements UserEventHistoryRepositor
     }
 
     @Override
-    public UserEventHistory save(UserEventHistory history) {
+    public UserEventHistory save(UserEventHistory history) throws MongoInterruptedException  {
         UserEventHistoryEntity userEventHistoryEntity = userEventHistoryEntityMapper.toDocument(history);
 
         return userEventHistoryEntityMapper.toDom(userEventHistoryMongoRepository.save(userEventHistoryEntity));

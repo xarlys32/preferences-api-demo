@@ -31,6 +31,6 @@ public class UserEntityMapper {
         }
 
         private static ConsentEntity consentToDocument(Consent consent) {
-            return new ConsentEntity(consent.getId(), consent.isEnabled());
+            return new ConsentEntity(consent.getConsentId(), consent.isEnabled());
         }
 }

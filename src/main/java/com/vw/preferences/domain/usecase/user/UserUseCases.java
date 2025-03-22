@@ -29,7 +29,7 @@ public class UserUseCases {
     @QueryHandler
     public User getPreferences(GetPreferences query) {
         validateEmail(query.email());
-        User user = getUserForUpdate(query.email());
+        User user = getUserOrThrowException(query.email());
 
         return userRepository.getPreferencesByUser(query.email());
     }
@@ -38,7 +38,7 @@ public class UserUseCases {
     public User savePreferences(PostConsentUpdate command) {
         validateEmail(command.email());
         validateConsent(command.consent());
-        User userStored = getUserForUpdate(command.email());
+        User userStored = getUserOrThrowException(command.email());
         updateConsent(userStored.getConsents(), command.consent());
         commandGateway.send(new PostConsentEvent(userStored.getUserId(), command.consent()));
 
@@ -90,7 +90,7 @@ public class UserUseCases {
         }
     }
 
-    private User getUserForUpdate(String mail) {
+    private User getUserOrThrowException(String mail) {
         User userStored = userRepository.getPreferencesByUser(mail);
         if (userStored == null) {
             throw new PreferencesNotFoundException("Email not found");

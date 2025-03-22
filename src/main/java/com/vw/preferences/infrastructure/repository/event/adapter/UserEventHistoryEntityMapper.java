@@ -7,7 +7,7 @@ import com.vw.preferences.infrastructure.repository.event.entity.ConsentHistoryE
 import com.vw.preferences.infrastructure.repository.event.entity.UserEventHistoryEntity;
 import org.springframework.stereotype.Component;
 
-import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -31,7 +31,7 @@ public class UserEventHistoryEntityMapper {
     }
 
     public ConsentHistory fromPostEventToDom(Consent consent) {
-        return new ConsentHistory(consent.getConsentId(), consent.getEnabled(), LocalDate.now().atStartOfDay());
+        return new ConsentHistory(consent.getConsentId(), consent.getEnabled(), new Date());
     }
 
     private static ConsentHistoryEntity consentToDocument(ConsentHistory consentHistory) {
@@ -45,6 +45,6 @@ public class UserEventHistoryEntityMapper {
     }
 
     private static ConsentHistory fromConsentToDom(Consent consent) {
-        return new ConsentHistory(consent.getConsentId(), consent.getEnabled(), LocalDate.now().atStartOfDay());
+        return new ConsentHistory(consent.getConsentId(), consent.getEnabled(), new Date());
     }
 }

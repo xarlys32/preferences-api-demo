@@ -1,13 +1,13 @@
 package com.vw.preferences.infrastructure.rest.event;
 
+import com.vw.preferences.domain.exception.PreferencesNotFoundException;
+import com.vw.preferences.domain.exception.UserHistoryNotFoundException;
 import com.vw.preferences.domain.model.event.UserEventHistory;
 import com.vw.preferences.domain.usecase.event.GetUserHistory;
-import com.vw.preferences.domain.usecase.user.GetPreferences;
-import com.vw.preferences.domain.usecase.user.PostAccountCreate;
 import com.vw.preferences.infrastructure.rest.event.adapter.UseEventHistoryDTOMapper;
 import com.vw.preferences.infrastructure.rest.event.dtos.UserEventHistoryResponseDTO;
-import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.axonframework.queryhandling.QueryGateway;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -34,4 +34,8 @@ public class EventHistoryController {
         return ResponseEntity.ok(preferencesDTOMapper.toResponseDTO(history));
     }
 
+    @ExceptionHandler({UserHistoryNotFoundException.class})
+    public ResponseEntity<String> handleUserHistoryNotFoundExceptions(UserHistoryNotFoundException ex) {
+        return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
+    }
 }

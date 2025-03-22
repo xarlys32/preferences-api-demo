@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 
 @Data
 @AllArgsConstructor
@@ -12,6 +13,6 @@ import java.time.LocalDateTime;
 public class ConsentHistory {
     private String consentId;
     private boolean enabled;
-    private LocalDateTime updateTimestamp;
+    private Date updateTimestamp;
 
 }

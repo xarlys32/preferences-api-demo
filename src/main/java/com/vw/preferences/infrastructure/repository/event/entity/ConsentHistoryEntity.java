@@ -6,6 +6,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 
 @Document
 @AllArgsConstructor
@@ -16,5 +17,5 @@ public class ConsentHistoryEntity {
     @Field(name = "enabled")
     private boolean enabled;
     @Field(name = "update_time")
-    private LocalDateTime updateTimestamp;
+    private Date updateTimestamp;
 }

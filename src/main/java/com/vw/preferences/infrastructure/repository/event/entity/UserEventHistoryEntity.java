@@ -9,10 +9,10 @@ import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.util.List;
 
-@Document
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Document(collection = "userEventsHistory")
 public class UserEventHistoryEntity {
     @Id
     private String userId;

@@ -1,5 +1,7 @@
 package com.vw.preferences.infrastructure.rest.event;
 
+import com.vw.preferences.domain.model.event.UserEventHistory;
+import com.vw.preferences.domain.usecase.event.GetUserHistory;
 import com.vw.preferences.domain.usecase.user.GetPreferences;
 import com.vw.preferences.domain.usecase.user.PostAccountCreate;
 import com.vw.preferences.infrastructure.rest.event.adapter.UseEventHistoryDTOMapper;
@@ -12,34 +14,24 @@ import org.springframework.web.bind.annotation.*;
 import java.util.concurrent.ExecutionException;
 
 @RestController
-@RequestMapping("/preferences")
+@RequestMapping("/history")
 public class EventHistoryController {
 
-    private final CommandGateway commandGateway;
     private final QueryGateway queryGateway;
     private final UseEventHistoryDTOMapper preferencesDTOMapper;
 
-    public EventHistoryController(CommandGateway commandGateway, UseEventHistoryDTOMapper preferencesDTOMapper,
+    public EventHistoryController(UseEventHistoryDTOMapper preferencesDTOMapper,
                                   QueryGateway queryGateway) {
-        this.commandGateway = commandGateway;
         this.preferencesDTOMapper = preferencesDTOMapper;
         this.queryGateway = queryGateway;
     }
 
     @GetMapping()
     public ResponseEntity<UserEventHistoryResponseDTO> getPreferencesByUserId(@RequestParam String userId) throws ExecutionException, InterruptedException {
-        var futurePreferences = queryGateway.query(new GetPreferences(userId), Event.class);
-        Event preference = futurePreferences.get();
+        var futureResponse = queryGateway.query(new GetUserHistory(userId), UserEventHistory.class);
+        UserEventHistory history = futureResponse.get();
 
-        return ResponseEntity.ok(preferencesDTOMapper.toResponseDTO(preference));
+        return ResponseEntity.ok(preferencesDTOMapper.toResponseDTO(history));
     }
 
-    @PostMapping()
-    public ResponseEntity<UserEventHistoryResponseDTO> registerMail(@RequestParam String mail) throws ExecutionException, InterruptedException {
-        // validar mail
-        var newUserPreferences = commandGateway.sendAndWait(new PostAccountCreate(mail));
-        UserEventHistoryResponseDTO responseDTO = preferencesDTOMapper.toResponseDTO((Event) newUserPreferences);
-
-        return ResponseEntity.ok(responseDTO);
-    }
 }

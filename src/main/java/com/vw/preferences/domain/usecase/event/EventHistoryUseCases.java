@@ -23,11 +23,16 @@ public class EventHistoryUseCases {
     }
 
     @QueryHandler
-    public void saveEventHistory(PostConsentEvent event) {
+    public UserEventHistory getUserHistory(GetUserHistory command) {
+       return  eventHistoryRepository.getHistoryByUser(command.userId());
+    }
+
+    @QueryHandler
+    public UserEventHistory saveEventHistory(PostConsentEvent event) {
         UserEventHistory userEvent = getUserFromRepo(event.userId());
         ConsentHistory consentFromEvent = userEventHistoryEntityMapper.fromPostEventToDom(event.consent());
         addEventToUserFromRepo(userEvent, consentFromEvent);
-        eventHistoryRepository.save(userEvent);
+        return eventHistoryRepository.save(userEvent);
     }
 
     private UserEventHistory getUserFromRepo(String userId) {

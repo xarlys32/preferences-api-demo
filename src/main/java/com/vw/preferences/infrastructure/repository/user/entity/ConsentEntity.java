@@ -9,7 +9,6 @@ import org.springframework.data.mongodb.core.mapping.Field;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Document
 public class ConsentEntity {
     @Field(name = "consent_id")
     private String consentId;

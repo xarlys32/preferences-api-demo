@@ -64,7 +64,7 @@ public class PreferencesController {
 
     @ExceptionHandler({IllegalArgumentException.class})
     public ResponseEntity<String> handleIllegalArgumentExceptions(IllegalArgumentException ex) {
-        return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(ex.getMessage(), HttpStatus.UNPROCESSABLE_ENTITY);
     }
 
     @ExceptionHandler({PreferencesNotFoundException.class})
@@ -78,7 +78,7 @@ public class PreferencesController {
     }
 
     @ExceptionHandler({DuplicateMailException.class})
-    public ResponseEntity<String> handleDuplicateMailExceptionExceptions(DuplicateMailException ex) {
+    public ResponseEntity<String> handleDuplicateMailExceptions(DuplicateMailException ex) {
         return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
     }
 

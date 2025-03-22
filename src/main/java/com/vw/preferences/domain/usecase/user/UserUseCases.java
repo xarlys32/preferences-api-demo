@@ -70,8 +70,8 @@ public class UserUseCases {
 
     private void validateEmail(String email) {
         Pattern pattern = Pattern.compile(Constants.EMAIL_REGEX);
-        if (!pattern.matcher(email).matches()) {
-            throw new IllegalArgumentException("Invalid email format");
+        if (email.isEmpty() || !pattern.matcher(email).matches()) {
+            throw new IllegalArgumentException("Invalid email");
         }
     }
 

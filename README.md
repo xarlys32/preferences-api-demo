@@ -1,8 +1,8 @@
 # preferences-api-demo
 ## Project structure
-<p>The Projects uses an aproach of Hexagonal Architecture with some DDD elements.</p>
+<p>The Project use an aproach of Hexagonal Architecture with some DDD elements.</p>
 <p>I create this project with Java 17 and Spring Boot using 2 principal domains, USER and EVENT, like the part of event could be another microservice that consumes a process of update preferences by user part, I use Axon Framework.
-Axon Framework allowed me to comunicate the different part of my system through messages of Query and Command and we could use it with another microservices implementing and extra tool like RabbitMq. In this case is for internal comunication and making distinction between layers.</p>
+Axon Framework allowed me to comunicate the differents parts of my system through messages of Query and Command and we could use it with another microservices implementing and extra tool like RabbitMq. In this case is for internal comunication and making distinction between layers.</p>
 
 <p>For Database I use Mongo DB where I can store the events changes embedded in a user historical registry.</p>
 
@@ -16,8 +16,8 @@ Some images:
 
 
 ## Project set up
-Before run the app, is necesary to have docker for run a mongo image and follow next steps:
-### Download with docker
+Before run the app, is necesary to have docker for run a mongo image and follow the next steps:
+### Download Mongo with docker
 docker run -d --name mongodb-container -p 27017:27017 -e MONGO_INITDB_ROOT_USERNAME=admin -e MONGO_INITDB_ROOT_PASSWORD=adminpass mongo
 ### Run container 
 docker start mongodb-container

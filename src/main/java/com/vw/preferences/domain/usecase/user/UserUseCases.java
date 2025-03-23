@@ -51,6 +51,7 @@ public class UserUseCases {
         if(userStored != null) {
             throw new DuplicateMailException("Email already registered");
         }
+
         return userRepository.createAccount(command.mail());
     }
 

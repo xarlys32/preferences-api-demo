@@ -34,6 +34,7 @@ public class EventHistoryUseCases {
         UserEventHistory userEvent = getHistoryFromRepoOrCreate(event.userId());
         ConsentHistory consentFromEvent = userEventHistoryEntityMapper.fromPostEventToDom(event.consent());
         addEventToUserFromRepo(userEvent, consentFromEvent);
+
         return eventHistoryRepository.save(userEvent);
     }
 
@@ -42,6 +43,7 @@ public class EventHistoryUseCases {
         if (userEventHistoryFromRepo == null) {
             return new UserEventHistory(userId, new ArrayList<>());
         }
+
         return userEventHistoryFromRepo;
     }
 

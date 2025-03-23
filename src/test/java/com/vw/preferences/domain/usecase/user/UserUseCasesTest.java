@@ -40,7 +40,7 @@ public class UserUseCasesTest {
     }
 
     @Test
-    public void getPreferencesReturnsErrorWhenNotFound() {
+    public void getPreferencesThrowErrorWhenNotFound() {
         when(userRepository.getPreferencesByUser(email)).thenThrow(PreferencesNotFoundException.class);
 
         GetPreferences query = new GetPreferences(email);
@@ -49,7 +49,7 @@ public class UserUseCasesTest {
     }
 
     @Test
-    public void getPreferencesReturnsErrorWhenMailIsWrong() {
+    public void getPreferencesThrowErrorWhenMailIsWrong() {
         when(userRepository.getPreferencesByUser("a")).thenThrow(IllegalArgumentException.class);
 
         GetPreferences query = new GetPreferences("a");
@@ -72,7 +72,7 @@ public class UserUseCasesTest {
     }
 
     @Test
-    public void savePreferencesReturnsErrorWhenConsentIsEmpty() {
+    public void savePreferencesThrowErrorWhenConsentIsEmpty() {
         when(userRepository.getPreferencesByUser(email)).thenReturn(userMock);
         when(userRepository.save(any(User.class))).thenThrow(IllegalArgumentException.class);
 
@@ -82,7 +82,7 @@ public class UserUseCasesTest {
     }
 
     @Test
-    public void savePreferencesReturnsErrorWhenConsentIsWrong() {
+    public void savePreferencesThrowErrorWhenConsentIsWrong() {
         when(userRepository.getPreferencesByUser(email)).thenReturn(userMock);
         when(userRepository.save(any(User.class))).thenThrow(IllegalArgumentException.class);
 
@@ -93,7 +93,7 @@ public class UserUseCasesTest {
     }
 
     @Test
-    public void savePreferencesReturnsErrorWhenConsentEnabledIsNull() {
+    public void savePreferencesThrowErrorWhenConsentEnabledIsNull() {
         when(userRepository.getPreferencesByUser(email)).thenReturn(userMock);
         when(userRepository.save(any(User.class))).thenThrow(IllegalArgumentException.class);
 

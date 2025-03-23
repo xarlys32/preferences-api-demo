@@ -10,9 +10,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class UserDTOMapper {
     public UserResponseDTO toResponseDTO(User user) {
-        if (user == null) {
-            throw new PreferencesNotFoundException("Email not found");
-        }
         return new UserResponseDTO(user.getUserId(), user.getEmail(),
                 user.getConsents().stream().map(UserDTOMapper::toConsentDTO).toList());
     }

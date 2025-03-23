@@ -27,6 +27,7 @@ public class UserEventHistoryRepositoryHttp implements UserEventHistoryRepositor
 
     public UserEventHistory getHistoryByUser(String userId) {
         UserEventHistoryEntity entity = userEventHistoryMongoRepository.findByUserId(userId);
+
         return entity != null ? userEventHistoryEntityMapper.toDom(userEventHistoryMongoRepository.findByUserId(userId)) :
                 null;
     }

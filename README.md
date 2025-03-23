@@ -12,7 +12,8 @@ Testing is being develop with Junit and mockito but I only cover a few cases of 
 I include 4 endpoint (3 for user with get, create and update and another for event to get the info more easily in this demo)
 Some images:
 ![imagen](https://github.com/user-attachments/assets/41a4ecda-7fb8-49ed-8c3c-61c269ba5b81)
-![imagen](https://github.com/user-attachments/assets/b5842ba0-a862-4254-9977-cc4751200257)
+![imagen](https://github.com/user-attachments/assets/ee353c74-c786-44d2-8bf9-7feb3e66f456)
+
 
 ## Project set up
 Before run the app, is necesary to have docker for run a mongo image and follow next steps:

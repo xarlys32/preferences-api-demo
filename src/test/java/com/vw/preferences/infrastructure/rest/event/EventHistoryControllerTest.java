@@ -22,7 +22,7 @@ public class EventHistoryControllerTest {
     private final QueryGateway queryGateway = mock(QueryGateway.class);
     private final UseEventHistoryDTOMapper preferencesDTOMapper = new UseEventHistoryDTOMapper();
 
-    EventHistoryController constroller = new EventHistoryController(queryGateway, preferencesDTOMapper);
+    EventHistoryController controller = new EventHistoryController(queryGateway, preferencesDTOMapper);
     PodamFactory podam = new PodamFactoryImpl();
     String userId = "1";
     UserEventHistory userHistoryMock = podam.manufacturePojo(UserEventHistory.class);
@@ -33,7 +33,7 @@ public class EventHistoryControllerTest {
         futureHistory.complete(userHistoryMock);
         when(queryGateway.query(any(GetUserHistory.class), eq(UserEventHistory.class))).thenReturn(futureHistory);
 
-        var response = constroller.getPreferencesByUserId(userId);
+        var response = controller.getPreferencesByUserId(userId);
 
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals(userHistoryMock.getUserId(), response.getBody().getUserId());
@@ -43,6 +43,6 @@ public class EventHistoryControllerTest {
     public void getPreferencesByUserIdThrowUserHistoryNotFoundWhenNotFound() throws ExecutionException, InterruptedException {
         when(queryGateway.query(any(GetUserHistory.class), eq(UserEventHistory.class))).thenThrow(UserHistoryNotFoundException.class);
 
-        assertThrows(UserHistoryNotFoundException.class, () -> constroller.getPreferencesByUserId(userId));
+        assertThrows(UserHistoryNotFoundException.class, () -> controller.getPreferencesByUserId(userId));
     }
 }

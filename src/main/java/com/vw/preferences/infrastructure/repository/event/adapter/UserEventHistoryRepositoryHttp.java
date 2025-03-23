@@ -18,7 +18,6 @@ public class UserEventHistoryRepositoryHttp implements UserEventHistoryRepositor
         this.userEventHistoryEntityMapper = preferencesEntityMapper;
     }
 
-    @Override
     public UserEventHistory save(UserEventHistory history) throws MongoInterruptedException  {
         UserEventHistoryEntity userEventHistoryEntity = userEventHistoryEntityMapper.toDocument(history);
 
@@ -26,7 +25,6 @@ public class UserEventHistoryRepositoryHttp implements UserEventHistoryRepositor
     }
 
 
-    @Override
     public UserEventHistory getHistoryByUser(String userId) {
         UserEventHistoryEntity entity = userEventHistoryMongoRepository.findByUserId(userId);
         return entity != null ? userEventHistoryEntityMapper.toDom(userEventHistoryMongoRepository.findByUserId(userId)) :

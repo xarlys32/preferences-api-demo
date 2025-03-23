@@ -27,8 +27,9 @@ public class PreferencesController {
     private final QueryGateway queryGateway;
     private final UserDTOMapper preferencesDTOMapper;
 
-    public PreferencesController(CommandGateway commandGateway, UserDTOMapper preferencesDTOMapper,
-                                 QueryGateway queryGateway) {
+    public PreferencesController(CommandGateway commandGateway,
+                                 QueryGateway queryGateway,
+                                 UserDTOMapper preferencesDTOMapper) {
         this.commandGateway = commandGateway;
         this.preferencesDTOMapper = preferencesDTOMapper;
         this.queryGateway = queryGateway;
@@ -53,7 +54,7 @@ public class PreferencesController {
     }
 
     @PostMapping("/update")
-    @Operation(summary = "Get event from a range of dates with format yyyy-MM-dd")
+    @Operation(summary = "Update preferences with consent")
     public ResponseEntity<UserResponseDTO> updatePreferences(@RequestParam String email, @RequestParam String consent,
                                                              @RequestParam Boolean enabled) throws ExecutionException, InterruptedException {
         var newUserPreferences = commandGateway.sendAndWait(new PostConsentUpdate(email, new Consent(consent, enabled)));

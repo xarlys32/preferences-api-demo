@@ -1,8 +1,8 @@
 # preferences-api-demo
 ## Project structure
 <p>The Project use an aproach of Hexagonal Architecture with some DDD elements.</p>
-<p>I create this project with Java 17 and Spring Boot using 2 principal domains, USER and EVENT, like the part of event could be another microservice that consumes a process of update preferences by user part, I use Axon Framework.
-Axon Framework allowed me to comunicate the differents parts of my system through messages of Query and Command and we could use it with another microservices implementing and extra tool like RabbitMq. In this case is for internal comunication and making distinction between layers.</p>
+<p>I create this project with Java 17 and Spring Boot using 2 principal domains, USER and EVENT, like the part of event could be another microservice that consumes a process of update preferences by user, I use Axon Framework.</p>
+<p>Axon Framework allowed me to comunicate the differents parts of my system through messages of Query and Command and we could use it with another microservices implementing and extra tool like RabbitMq. In this case is for internal comunication and making distinction between layers.</p>
 
 <p>For Database I use Mongo DB where I can store the events changes embedded in a user historical registry.</p>
 

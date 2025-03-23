@@ -22,10 +22,10 @@ import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class PreferencesControllerTest {
-    private CommandGateway commandGateway = mock(CommandGateway.class);
-    private QueryGateway queryGateway = mock(QueryGateway.class);
+    private final CommandGateway commandGateway = mock(CommandGateway.class);
+    private final QueryGateway queryGateway = mock(QueryGateway.class);
 
-    private UserDTOMapper preferencesDTOMapper = new UserDTOMapper();
+    private final UserDTOMapper preferencesDTOMapper = new UserDTOMapper();
     private PreferencesController controller = new PreferencesController(commandGateway,
             queryGateway, preferencesDTOMapper);
 

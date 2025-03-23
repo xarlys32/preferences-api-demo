@@ -19,8 +19,8 @@ import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class EventHistoryControllerTest {
-    private QueryGateway queryGateway = mock(QueryGateway.class);
-    private UseEventHistoryDTOMapper preferencesDTOMapper = new UseEventHistoryDTOMapper();
+    private final QueryGateway queryGateway = mock(QueryGateway.class);
+    private final UseEventHistoryDTOMapper preferencesDTOMapper = new UseEventHistoryDTOMapper();
 
     EventHistoryController constroller = new EventHistoryController(queryGateway, preferencesDTOMapper);
     PodamFactory podam = new PodamFactoryImpl();

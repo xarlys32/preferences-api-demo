@@ -29,9 +29,8 @@ public class UserUseCases {
     @QueryHandler
     public User getPreferences(GetPreferences query) {
         validateEmail(query.email());
-        User user = getUserOrThrowException(query.email());
 
-        return userRepository.getPreferencesByUser(query.email());
+        return getUserOrThrowException(query.email());
     }
 
     @CommandHandler

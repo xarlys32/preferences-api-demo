@@ -1,6 +1,5 @@
 package com.vw.preferences.infrastructure.rest.event;
 
-import com.vw.preferences.domain.exception.PreferencesNotFoundException;
 import com.vw.preferences.domain.exception.UserHistoryNotFoundException;
 import com.vw.preferences.domain.model.event.UserEventHistory;
 import com.vw.preferences.domain.usecase.event.GetUserHistory;
@@ -20,10 +19,10 @@ public class EventHistoryController {
     private final QueryGateway queryGateway;
     private final UseEventHistoryDTOMapper preferencesDTOMapper;
 
-    public EventHistoryController(UseEventHistoryDTOMapper preferencesDTOMapper,
-                                  QueryGateway queryGateway) {
-        this.preferencesDTOMapper = preferencesDTOMapper;
+    public EventHistoryController(QueryGateway queryGateway,
+            UseEventHistoryDTOMapper preferencesDTOMapper) {
         this.queryGateway = queryGateway;
+        this.preferencesDTOMapper = preferencesDTOMapper;
     }
 
     @GetMapping()

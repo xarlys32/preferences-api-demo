@@ -8,6 +8,6 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 public class UserEventHistoryResponseDTO {
-    private String id;
+    private String userId;
     private List<ConsentDTO> consents;
 }

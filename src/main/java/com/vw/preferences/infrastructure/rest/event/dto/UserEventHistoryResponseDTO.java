@@ -1,4 +1,4 @@
-package com.vw.preferences.infrastructure.rest.user.dtos;
+package com.vw.preferences.infrastructure.rest.event.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,8 +7,7 @@ import java.util.List;
 
 @Data
 @AllArgsConstructor
-public class UserResponseDTO {
+public class UserEventHistoryResponseDTO {
     private String userId;
-    private String email;
     private List<ConsentDTO> consents;
 }

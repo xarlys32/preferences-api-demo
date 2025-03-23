@@ -4,7 +4,7 @@ import com.vw.preferences.domain.exception.UserHistoryNotFoundException;
 import com.vw.preferences.domain.model.event.UserEventHistory;
 import com.vw.preferences.domain.usecase.event.GetUserHistory;
 import com.vw.preferences.infrastructure.rest.event.adapter.UseEventHistoryDTOMapper;
-import com.vw.preferences.infrastructure.rest.event.dtos.UserEventHistoryResponseDTO;
+import com.vw.preferences.infrastructure.rest.event.dto.UserEventHistoryResponseDTO;
 import org.axonframework.queryhandling.QueryGateway;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

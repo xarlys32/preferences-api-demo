@@ -3,8 +3,8 @@ package com.vw.preferences.infrastructure.rest.user.adapter;
 import com.vw.preferences.domain.exception.PreferencesNotFoundException;
 import com.vw.preferences.domain.model.user.Consent;
 import com.vw.preferences.domain.model.user.User;
-import com.vw.preferences.infrastructure.rest.user.dtos.ConsentDTO;
-import com.vw.preferences.infrastructure.rest.user.dtos.UserResponseDTO;
+import com.vw.preferences.infrastructure.rest.user.dto.ConsentDTO;
+import com.vw.preferences.infrastructure.rest.user.dto.UserResponseDTO;
 import org.springframework.stereotype.Component;
 
 @Component

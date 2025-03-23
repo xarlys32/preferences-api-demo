@@ -9,7 +9,7 @@ import com.vw.preferences.domain.usecase.user.GetPreferences;
 import com.vw.preferences.domain.usecase.user.PostAccountCreate;
 import com.vw.preferences.domain.usecase.user.PostConsentUpdate;
 import com.vw.preferences.infrastructure.rest.user.adapter.UserDTOMapper;
-import com.vw.preferences.infrastructure.rest.user.dtos.UserResponseDTO;
+import com.vw.preferences.infrastructure.rest.user.dto.UserResponseDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.axonframework.queryhandling.QueryGateway;

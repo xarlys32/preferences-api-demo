@@ -1,4 +1,4 @@
-package com.vw.preferences.infrastructure.rest.event.dtos;
+package com.vw.preferences.infrastructure.rest.event.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

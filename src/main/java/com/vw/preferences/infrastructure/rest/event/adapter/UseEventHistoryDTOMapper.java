@@ -2,8 +2,8 @@ package com.vw.preferences.infrastructure.rest.event.adapter;
 
 import com.vw.preferences.domain.model.event.ConsentHistory;
 import com.vw.preferences.domain.model.event.UserEventHistory;
-import com.vw.preferences.infrastructure.rest.event.dtos.ConsentDTO;
-import com.vw.preferences.infrastructure.rest.event.dtos.UserEventHistoryResponseDTO;
+import com.vw.preferences.infrastructure.rest.event.dto.ConsentDTO;
+import com.vw.preferences.infrastructure.rest.event.dto.UserEventHistoryResponseDTO;
 import org.springframework.stereotype.Component;
 
 @Component
